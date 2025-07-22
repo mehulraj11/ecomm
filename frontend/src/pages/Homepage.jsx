@@ -1,10 +1,8 @@
 import { categories } from "../data/shopData";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Homepage = () => {
-  const naigate = useNavigate();
   return (
     <div className="bg-black">
-      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10"></div>
         <div
@@ -19,19 +17,18 @@ const Homepage = () => {
             <span className="text-white">RACE</span>
             <span className="text-gray-300 block">INSPIRED</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto">
             Premium streetwear collection inspired by the speed, precision, and
             luxury of Formula 1 racing.
           </p>
-          <button
-            onClick={() => navigateTo("products")}
+          <Link
+            to="/products"
             className="bg-white hover:bg-gray-100 text-black font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             View All Products
-          </button>
+          </Link>
         </div>
       </section>
-      {/* Categories Section */}
       <section className="py-20 bg-gradient-to-b from-black to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-white text-center mb-16">

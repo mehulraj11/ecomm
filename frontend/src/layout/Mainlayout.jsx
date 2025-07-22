@@ -1,8 +1,12 @@
 import { Outlet } from "react-router-dom";
-const Mainlayout = () => {
+import Header from "../components/Header";
+const Mainlayout = ({ getCartItemCount }) => {
   return (
     <div className="min-h-screen bg-black text-white">
-      <Outlet />
+      <Header getCartItemCount={getCartItemCount} />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };
