@@ -1,6 +1,8 @@
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -15,7 +17,8 @@ const userSchema = new mongoose.Schema({
         match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Please provide a valid email'],
     }, password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
@@ -32,6 +35,17 @@ userSchema.pre('save', async function (next) {
 })
 userSchema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
+}
+userSchema.methods.getSignedToken = function () {
+    return jwt.sign({
+        id: this._id,
+        username: this.username,
+        email: this.email
+    },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "10h"
+        })
 }
 userSchema.methods.getResetPasswordToken = function () {
     const resetToken = crypto.randomBytes(20).toString('hex');
