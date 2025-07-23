@@ -1,8 +1,8 @@
 import { ArrowLeft } from "lucide-react";
-
-const BackButton = ({ onBack }) => (
-  <button
-    onClick={onBack}
+import { Link } from "react-router-dom";
+const BackButton = ({ route }) => (
+  <Link
+    to={route}
     className="flex items-center text-gray-400 hover:text-white transition-colors mb-8 group"
   >
     <ArrowLeft
@@ -10,7 +10,7 @@ const BackButton = ({ onBack }) => (
       className="mr-2 transition-transform group-hover:-translate-x-1"
     />
     Back
-  </button>
+  </Link>
 );
 
 export default BackButton;
